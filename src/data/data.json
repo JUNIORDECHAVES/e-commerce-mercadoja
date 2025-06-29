@@ -1,0 +1,98 @@
+{
+    "supermarket": {
+        "name": "Supermercado Exemplo",
+        "location": "Rua das Flores, 123, Cidade Exemplo",
+        "products": [
+            {
+                "id": 1,
+                "title": "Arroz",
+                "category": "Grãos",
+                "price": 4.99,
+                "image": "https://placehold.co/100x100/FFF9C4/FFEB3B?text=Arroz+5kg",
+                "rating": 4,
+                "details": "Arroz branco tipo 1, pacote de 5kg. Ideal para o dia a dia, rico em carboidratos e essencial na mesa do brasileiro. Produto selecionado, grãos inteiros e de alta qualidade."
+            },
+            {
+                "id": 2,
+                "title": "Feijão",
+                "category": "Grãos",
+                "price": 5.49,
+                "image": "https://placehold.co/100x100/FFF3E0/795548?text=Feijão",
+                "rating": 4,
+                "details": "Feijão carioca selecionado, pacote de 1kg. Rico em fibras e proteínas, ideal para refeições nutritivas. Cozimento rápido e sabor caseiro garantido."
+            },
+            {
+                "id": 3,
+                "title": "Macarrão",
+                "category": "Massas",
+                "price": 3.99,
+                "image": "https://placehold.co/100x100/FFF8E1/FF9800?text=Macarrão",
+                "rating": 5,
+                "details": "Macarrão espaguete tradicional, pacote de 500g. Feito com trigo de alta qualidade. Perfeito para preparar receitas italianas ou do dia a dia com muito sabor."
+            },
+            {
+                "id": 4,
+                "title": "Açúcar",
+                "category": "Condimentos",
+                "price": 2.99,
+                "image": "https://placehold.co/100x100/F3E5F5/9C27B0?text=Açúcar",
+                "rating": 3,
+                "details": "Açúcar refinado branco, pacote de 1kg. Indispensável para adoçar bebidas e preparar sobremesas. Produto de alta pureza e qualidade."
+            },
+            {
+                "id": 5,
+                "title": "Óleo de Soja",
+                "category": "Óleos",
+                "price": 6.99,
+                "image": "https://placehold.co/100x100/FFFDE7/FFEB3B?text=Óleo",
+                "rating": 4,
+                "details": "Óleo de soja refinado, garrafa de 900ml. Ideal para frituras, refogados e saladas. Fonte de gorduras vegetais com ótimo custo-benefício."
+            },
+            {
+                "id": 6,
+                "title": "Leite",
+                "category": "Laticínios",
+                "price": 3.49,
+                "image": "https://placehold.co/100x100/E1F5FE/03A9F4?text=Leite",
+                "rating": 4,
+                "details": "Leite integral UHT, caixa de 1 litro. Rico em cálcio e vitaminas, ideal para consumo diário puro ou em receitas culinárias."
+            },
+            {
+                "id": 7,
+                "title": "Pão",
+                "category": "Padaria",
+                "price": 1.99,
+                "image": "https://placehold.co/100x100/FFF3E0/FF5722?text=Pão",
+                "rating": 5,
+                "details": "Pão francês fresco, unidade média. Crocante por fora e macio por dentro. Perfeito para café da manhã ou lanches."
+            },
+            {
+                "id": 8,
+                "title": "Frutas Sortidas",
+                "category": "Hortifruti",
+                "price": 2.49,
+                "image": "https://placehold.co/100x100/E8F5E9/4CAF50?text=Frutas",
+                "rating": 5,
+                "details": "Frutas sortidas da estação, embalagem de 1kg. Seleção de frutas frescas e variadas, ideais para uma alimentação saudável e equilibrada."
+            },
+            {
+                "id": 9,
+                "title": "Carne Bovina",
+                "category": "Carnes",
+                "price": 19.99,
+                "image": "https://placehold.co/100x100/FFEBEE/F44336?text=Carne",
+                "rating": 4,
+                "details": "Carne bovina de primeira, corte dianteiro (acém), embalagem de 1kg. Ideal para cozidos, grelhados e churrascos. Carne macia e saborosa."
+            },
+            {
+                "id": 10,
+                "title": "Peixe Fresco",
+                "category": "Carnes",
+                "price": 29.99,
+                "image": "https://placehold.co/100x100/E3F2FD/2196F3?text=Peixe",
+                "rating": 5,
+                "details": "Peixe fresco (tilápia inteira), unidade com aproximadamente 1kg. Rico em proteínas e ômega 3. Ideal para assados, grelhados ou moquecas."
+            }
+        ]
+    }
+}

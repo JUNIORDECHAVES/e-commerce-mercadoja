@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { ProductCard } from '../../components/ProductCard/Productcard';
 import data from '../../data/data.json';
 
@@ -18,11 +19,11 @@ export const Home = () => {
 
     return (
         <main className="flex-grow container mx-auto px-4 py-8">
-            
-            <section className="bg-gradient-to-r from-[#232F3E] to-[#47576B] text-white rounded-lg shadow-lg p-8 mb-8 text-center"> 
+
+            <section className="bg-gradient-to-r from-[#232F3E] to-[#47576B] text-white rounded-lg shadow-lg p-8 mb-8 text-center">
                 <h2 className="text-4xl font-bold mb-4">Sua Feira Fresca na Porta de Casa!</h2>
                 <p className="text-xl mb-6">Encontre as melhores ofertas e a maior variedade de produtos.</p>
-                <button className="bg-[#FF9900] text-[#232F3E] font-bold py-3 px-8 rounded-full text-lg hover:bg-[#E68A00] transition-colors duration-300"> 
+                <button className="bg-[#FF9900] text-[#232F3E] font-bold py-3 px-8 rounded-full text-lg hover:bg-[#E68A00] transition-colors duration-300">
                     Começar a Comprar!
                 </button>
             </section>
@@ -62,12 +63,14 @@ export const Home = () => {
                 <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9900] pb-2">engeral</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {data.supermarket.products.map(product => (
-                        <ProductCard key={product.id} product={product} />
+                        <Link to={`/product/${product.id}`}>
+                            <ProductCard key={product.id} product={product} />
+                        </Link>
                     ))}
                 </div>
             </section>
 
-            
+
             <section className="mb-8">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9900] pb-2">Chegando Fresquinho</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -76,9 +79,6 @@ export const Home = () => {
                     ))}
                 </div>
             </section>
-
-            {/* Seção de Categorias (exemplo) */}
-            
         </main>
 
     );

@@ -1,35 +1,60 @@
 import { ChevronLeft, ChevronRight, Minus, Plus, ShoppingCart, Star } from "lucide-react";
 import { memo, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import data from "../../data/data.json";
+import { useCartItems } from "../../contexts/userCarItens";
 
-interface ProductProps {
-    id: number;
-    images: string[];
-    title: string;
-    price: number;
-    rating: number;
-    description: string;
-    weight: string;
-    availability: string;
-}
+// interface ProductProps {
+//     id: number;
+//     images: string[];
+//     title: string;
+//     price: number;
+//     rating: number;
+//     description: string;
+//     weight: string;
+//     availability: string;
+// }
 
 const ProductPage = memo(() => {
-    const product: ProductProps = {
-        id: 1,
-        images: [
-            'https://placehold.co/600x400/C8E6C9/2E7D32?text=Maçãs+Frescas+1',
-            'https://placehold.co/600x400/B2EBF2/00BCD4?text=Maçãs+Frescas+2',
-            'https://placehold.co/600x400/FFCCBC/FF5722?text=Maçãs+Frescas+3',
-        ],
-        title: 'Maçãs Frescas - Pacote 1kg',
-        price: 9.90,
-        rating: 5,
-        description: 'Maçãs Gala frescas e crocantes, colhidas na estação. Perfeitas para lanches saudáveis, sucos ou para complementar suas receitas favoritas. Embalagem com aproximadamente 1kg. Ricas em vitaminas e fibras, ideais para o consumo diário.',
-        weight: '1 kg',
-        availability: 'Em estoque',
-    };
+    const { id } = useParams()
 
-    const [quantity, setQuantity] = useState(1); // Estado para controlar a quantidade
-    const [currentImageIndex, setCurrentImageIndex] = useState(0); // Estado para o índice da imagem atual no slider
+    const itemId = data.supermarket.products.find((item) => item.id === Number(id));
+    const imageArray = [itemId?.image];
+
+    const { setCartItems, cartItems } = useCartItems();
+
+const handleAddCart = () => {
+    if (itemId && cartItems.find(item => item.id === itemId.id)) {
+        const existingItem = cartItems.find(item => item.id === itemId.id);
+        if (existingItem) {
+            setCartItems((prevItems) =>{
+                return prevItems.map((item) => {
+                    return item.id === existingItem.id ? {...item, quantity: quantity} : item;
+                })
+            })
+        }
+        return alert("Produto já adicionado ao carrinho, aumente a quantidade!");
+    }
+
+
+    setCartItems((prevItems) => {
+        return [
+            ...prevItems,
+            {
+                id: itemId?.id!,
+                title: itemId?.title!,
+                price: itemId?.price!,
+                quantity: quantity,
+                image: itemId?.image || 'https://placehold.co/400x300/D7CCC8/795548?text=Imagem+Indisponível',
+            },
+        ];
+    });
+};
+
+
+
+    const [quantity, setQuantity] = useState(1);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     const handleQuantityChange = (type: 'increase' | 'decrease') => {
         if (type === 'increase') {
@@ -41,40 +66,42 @@ const ProductPage = memo(() => {
 
     const goToPreviousImage = () => {
         setCurrentImageIndex(prevIndex =>
-            prevIndex === 0 ? product.images.length - 1 : prevIndex - 1
+            prevIndex === 0 ? imageArray.length - 1 : prevIndex - 1
         );
     };
 
     const goToNextImage = () => {
         setCurrentImageIndex(prevIndex =>
-            prevIndex === product.images.length - 1 ? 0 : prevIndex + 1
+            prevIndex === imageArray.length - 1 ? 0 : prevIndex + 1
         );
     };
 
-    // Efeito para o slider automático
     useEffect(() => {
-        if (product.images.length > 1) { // Só ativa o slider se houver mais de uma imagem
+        if (imageArray.length > 1) {
             const interval = setInterval(() => {
                 goToNextImage();
-            }, 2000); // Mudar a imagem a cada 2 segundos
+            }, 2000);
 
-            return () => clearInterval(interval); // Limpa o intervalo quando o componente desmonta
+            return () => clearInterval(interval);
         }
-    }, [currentImageIndex, product.images.length]);
+    }, [currentImageIndex, imageArray.length]);
+
+    if (!itemId) {
+        return <div className="container mx-auto px-4 py-8">Produto não encontrado.</div>;
+    }
 
     return (
         <main className="flex-grow container mx-auto px-4 py-8">
             <div className="bg-white rounded-lg shadow-lg p-6 md:p-8 flex flex-col md:flex-row items-start md:space-x-8">
-                {/* Coluna do Slider de Imagens do Produto */}
                 <div className="w-full md:w-1/2 flex flex-col items-center mb-6 md:mb-0">
                     <div className="relative w-full max-w-lg overflow-hidden rounded-lg shadow-md">
                         <img
-                            src={product.images[currentImageIndex]}
-                            alt={`${product.title} - ${currentImageIndex + 1}`}
+                            src={imageArray[currentImageIndex]}
+                            alt={`${itemId.title} - ${currentImageIndex + 1}`}
                             className="w-full h-auto object-cover transition-transform duration-500 ease-in-out transform" /* Adicionado smooth transition */
                         />
-                        {/* Botões de navegação do slider */}
-                        {product.images.length > 1 && (
+
+                        {imageArray.length > 1 && (
                             <>
                                 <button
                                     onClick={goToPreviousImage}
@@ -91,10 +118,10 @@ const ProductPage = memo(() => {
                             </>
                         )}
                     </div>
-                    {/* Indicadores de slide (pontos) */}
-                    {product.images.length > 1 && (
+
+                    {imageArray.length > 1 && (
                         <div className="flex justify-center space-x-2 mt-4">
-                            {product.images.map((_, index) => (
+                            {imageArray.map((_, index) => (
                                 <button
                                     key={index}
                                     onClick={() => setCurrentImageIndex(index)}
@@ -104,12 +131,12 @@ const ProductPage = memo(() => {
                         </div>
                     )}
 
-                    
+
                 </div>
 
                 {/* Coluna dos Detalhes do Produto */}
                 <div className="w-full md:w-1/2">
-                    <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">{product.title}</h1>
+                    <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">{itemId.title}</h1>
 
                     {/* Avaliação */}
                     <div className="flex items-center mb-4">
@@ -118,27 +145,27 @@ const ProductPage = memo(() => {
                                 key={i}
                                 size={20}
                                 className={
-                                    i < product.rating
+                                    i < itemId.rating
                                         ? 'text-[#FF9900] fill-current'
                                         : 'text-gray-300'
                                 }
                             />
                         ))}
-                        <span className="ml-2 text-gray-600 text-lg">({product.rating}.0 avaliações)</span>
+                        <span className="ml-2 text-gray-600 text-lg">({itemId.rating}.0 avaliações)</span>
                     </div>
 
                     {/* Preço */}
-                    <p className="text-4xl font-bold text-[#232F3E] mb-6">R$ {product.price.toFixed(2)}</p>
+                    <p className="text-4xl font-bold text-[#232F3E] mb-6">R$ {itemId.price.toFixed(2)}</p>
 
                     {/* Descrição */}
                     <p className="text-gray-700 leading-relaxed mb-6">
-                        {product.description}
+                        {itemId.details}
                     </p>
 
                     {/* Detalhes Adicionais */}
                     <div className="mb-6 space-y-2 text-gray-700">
-                        <p><span className="font-semibold">Peso/Volume:</span> {product.weight}</p>
-                        <p><span className="font-semibold">Disponibilidade:</span> <span className="text-green-600">{product.availability}</span></p>
+                        <p><span className="font-semibold">Peso/Volume:</span> {itemId.weight}</p>
+                        <p><span className="font-semibold">Disponibilidade:</span> <span className="text-green-600">{itemId.availability}</span></p>
                     </div>
 
                     {/* Seletor de Quantidade */}
@@ -161,13 +188,11 @@ const ProductPage = memo(() => {
                         </div>
                     </div>
 
-                    {/* Novo Botão: Comprar Agora */}
-                    <button className="w-full bg-[#E68A00] text-white font-bold py-3 px-6 rounded-md shadow-lg hover:bg-[#FF9900] transition-colors duration-200 text-lg mb-4 flex items-center justify-center space-x-2">
+                    <button className="cursor-pointer w-full bg-[#E68A00] text-white font-bold py-3 px-6 rounded-md shadow-lg hover:bg-[#FF9900] transition-colors duration-200 text-lg mb-4 flex items-center justify-center space-x-2">
                         <span>Comprar Agora</span>
                     </button>
 
-                    {/* Botão Adicionar ao Carrinho */}
-                    <button className="w-full bg-[#FF9900] text-[#232F3E] font-bold py-3 px-6 rounded-md shadow-lg hover:bg-[#E68A00] transition-colors duration-200 text-lg flex items-center justify-center space-x-2">
+                    <button className="cursor-pointer w-full bg-[#FF9900] text-[#232F3E] font-bold py-3 px-6 rounded-md shadow-lg hover:bg-[#E68A00] transition-colors duration-200 text-lg flex items-center justify-center space-x-2" onClick={handleAddCart}>
                         <ShoppingCart size={24} />
                         <span>Adicionar ao Carrinho</span>
                     </button>

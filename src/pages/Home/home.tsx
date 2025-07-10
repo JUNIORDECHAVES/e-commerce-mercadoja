@@ -28,7 +28,7 @@ export const Home = () => {
                 </button>
             </section>
 
-            <section className="mb-8">
+            <section className="mb-8 block md:hidden ">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9900] pb-2">Explore Nossas Seções</h2> {/* Laranja vibrante para a borda */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                     <div className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-xl transition-shadow duration-300">
@@ -41,11 +41,19 @@ export const Home = () => {
                     </div>
                     <div className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-xl transition-shadow duration-300">
                         <img src="https://placehold.co/150x100/FFFDE7/FFC107?text=Padaria" alt="Padaria" className="mx-auto mb-4 rounded-md" />
-                        <h3 className="font-semibold text-lg text-gray-800">Padaria</h3>
+                        <h3 className="font-semibold text-lg text-gray-800">Padaria e Confeitaria</h3>
                     </div>
                     <div className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-xl transition-shadow duration-300">
-                        <img src="https://placehold.co/150x100/FBE9E7/FF7043?text=Congelados" alt="Congelados" className="mx-auto mb-4 rounded-md" />
-                        <h3 className="font-semibold text-lg text-gray-800">Congelados</h3>
+                        <img src="https://placehold.co/150x100/FBE9E7/FF7043?text=Carnes e Aves" alt="Congelados" className="mx-auto mb-4 rounded-md" />
+                        <h3 className="font-semibold text-lg text-gray-800">Carnes e Aves</h3>
+                    </div>
+                    <div className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-xl transition-shadow duration-300">
+                        <img src="https://placehold.co/150x100/FFFDE7/FFEB3B?text=Bebidas" alt="Congelados" className="mx-auto mb-4 rounded-md" />
+                        <h3 className="font-semibold text-lg text-gray-800">Bebidas</h3>
+                    </div>
+                    <div className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-xl transition-shadow duration-300">
+                        <img src="https://placehold.co/150x100/f2cfff/9c2aff?text=Limpeza" alt="Congelados" className="mx-auto mb-4 rounded-md" />
+                        <h3 className="font-semibold text-lg text-gray-800">Limpeza</h3>
                     </div>
                 </div>
             </section>
@@ -63,8 +71,8 @@ export const Home = () => {
                 <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9900] pb-2">engeral</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {data.supermarket.products.map(product => (
-                        <Link to={`/product/${product.id}`}>
-                            <ProductCard key={product.id} product={product} />
+                        <Link key={product.id}  to={`/product/${product.id}`}>
+                            <ProductCard  product={product} />
                         </Link>
                     ))}
                 </div>

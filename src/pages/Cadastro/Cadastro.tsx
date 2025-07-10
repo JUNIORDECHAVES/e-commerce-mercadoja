@@ -1,5 +1,5 @@
 import { Mail, Lock, User, LogIn, Store } from 'lucide-react'; // Importa ícones necessários
-import logo from '../../assets/mercadoja2.0-removebg-preview com sombra.png';
+import logo from '../../assets/mercadoja2.0-removebg-preview com sombra1.png';
 import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
@@ -74,36 +74,6 @@ const RegisterPage = () => {
                                 className="w-full pl-10 pr-4 py-3 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF9900] focus:border-transparent"
                                 placeholder="Confirmar Senha"
                             />
-                        </div>
-                    </div>
-
-                    {/* Seleção de Tipo de Usuário */}
-                    <div>
-                        <label className="block text-sm font-medium text-white mb-2">Tipo de Conta</label>
-                        <div className="mt-1 flex space-x-6">
-                            <label className="inline-flex items-center cursor-pointer">
-                                <input
-                                    type="radio"
-                                    name="user-type"
-                                    value="customer"
-                                    className="form-radio text-[#FF9900] h-5 w-5"
-                                    defaultChecked // Cliente como padrão
-                                />
-                                <span className="ml-2 text-white flex items-center">
-                                    <User size={18} className="mr-1" /> Cliente
-                                </span>
-                            </label>
-                            <label className="inline-flex items-center cursor-pointer">
-                                <input
-                                    type="radio"
-                                    name="user-type"
-                                    value="seller"
-                                    className="form-radio text-[#FF9900] h-5 w-5"
-                                />
-                                <span className="ml-2 text-white flex items-center">
-                                    <Store size={18} className="mr-1" /> Vendedor
-                                </span>
-                            </label>
                         </div>
                     </div>
 

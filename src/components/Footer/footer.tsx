@@ -1,7 +1,10 @@
 export const Footer = () => {
     return (
         <footer className="bg-[#232F3E] text-white p-6 mt-8"> {/* Azul escuro para o rodapé */}
-            <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="container mx-auto flex flex-col items-center justify-center md:grid md:grid-cols-1 md:grid-cols-3 gap-8 ">
+
+                
+
                 <div>
                     <h3 className="font-bold text-lg mb-4">Sobre Nós</h3>
                     <ul className="space-y-2 text-sm text-gray-300">
@@ -10,6 +13,9 @@ export const Footer = () => {
                         <li><a href="#" className="hover:text-[#FF9900]">Sustentabilidade</a></li>
                     </ul>
                 </div>
+
+                <hr className="w-full h-px md:hidden" />
+
                 <div>
                     <h3 className="font-bold text-lg mb-4">Ajuda</h3>
                     <ul className="space-y-2 text-sm text-gray-300">
@@ -19,6 +25,9 @@ export const Footer = () => {
                         <li><a href="#" className="hover:text-[#FF9900]">Fale Conosco</a></li>
                     </ul>
                 </div>
+
+                <hr className="w-full h-px md:hidden" />
+
                 <div>
                     <h3 className="font-bold text-lg mb-4">Serviços</h3>
                     <ul className="space-y-2 text-sm text-gray-300">

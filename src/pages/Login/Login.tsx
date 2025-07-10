@@ -1,5 +1,5 @@
 import { Mail, Lock, Search, LogIn } from 'lucide-react'; // Importa ícones necessários
-import logo from '../../assets/mercadoja2.0-removebg-preview com sombra.png';
+import logo from '../../assets/mercadoja2.0-removebg-preview com sombra1.png';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {

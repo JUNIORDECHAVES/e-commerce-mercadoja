@@ -29,7 +29,8 @@ const UserAccountDropdown = memo(
                     className="cursor-pointer flex items-center justify-end text-white hover:text-[#FF9900] transition-colors duration-200"
                 >
                     <User size={20} className="mr-1" />
-                    Minha Conta
+                    <span className='hidden md:block'>Minha Conta</span>
+                    
                 </button>
 
                 {isDropdownOpen && (

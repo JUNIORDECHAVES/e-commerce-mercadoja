@@ -1,5 +1,5 @@
 import { User, LogOut, Package, Store, ShoppingCart } from 'lucide-react'; // Importa ícones necessários
-import { memo, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 
 const UserAccountDropdown = memo(
     () => {
@@ -7,6 +7,20 @@ const UserAccountDropdown = memo(
         const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
         const [userType, setUserType] = useState<'customer' | 'seller' | null>(null); // 'customer' ou 'seller'
         const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false); // Estado para controlar a visibilidade do dropdown
+        const containerRef = useRef<HTMLDivElement | null>(null);
+
+        useEffect(() => {
+            const handleClickOutside = (e: MouseEvent) => {
+                if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+                    setIsDropdownOpen(false);
+                }
+            };
+            document.addEventListener('mousedown', handleClickOutside);
+
+            return () => document.removeEventListener('mousedown', handleClickOutside);
+        }
+            , []
+        )
 
         // Função para simular o login
         const handleLogin = (type: 'customer' | 'seller'): void => {
@@ -23,14 +37,15 @@ const UserAccountDropdown = memo(
         };
 
         return (
-            <div className="relative text-right">
+            <div className="relative text-right" ref={containerRef}>
                 <button
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     className="cursor-pointer flex items-center justify-end text-white hover:text-[#FF9900] transition-colors duration-200"
+                    
                 >
                     <User size={20} className="mr-1" />
                     <span className='hidden md:block'>Minha Conta</span>
-                    
+
                 </button>
 
                 {isDropdownOpen && (

@@ -7,6 +7,8 @@ import NotFoundPage from './pages/NotFound/notFound';
 import ProductPage from './pages/Productpage/ProductPage';
 import { UseCardtItensProvider } from './contexts/userCarItens';
 import CartPage from './pages/cartPage/cart';
+import { Checkout } from './pages/checkout/Checkout';
+import CategoryPage from './pages/categoryPage';
 
 
 
@@ -20,7 +22,9 @@ function App() {
             <Route path="/" element={<PageBase />}>
               <Route index element={<Home />} />
               <Route path='/product/:id' element={<ProductPage />} />
+              <Route path='/category/:category' element={<CategoryPage />} />
               <Route path='/shopping-cart' element={<CartPage />} />
+              <Route path='/checkout' element={<Checkout />} />
             </Route>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/cadastro" element={<RegisterPage />} />

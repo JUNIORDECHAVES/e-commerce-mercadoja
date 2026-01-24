@@ -1,7 +1,9 @@
 import Logo from './carrinho_vazio2-removebg-preview.png';
 import { useCartItems } from '../../contexts/userCarItens';
+import { useNavigate } from 'react-router-dom';
 
 const CartPage = () => {
+    const navigate = useNavigate();
 
     const { cartItems, totalCartPrice, } = useCartItems()
 
@@ -17,7 +19,7 @@ const CartPage = () => {
                         className={`h-100 w-100 mt-20 bg-cover`} />
                 </div>
             )}
-            <div className='w-full w-3xl'>
+            <div className='w-full'>
                 {cartItems.length >= 1 && (
                     <section className='flex justify-between w-xs rounded-lg md:w-5xl mt-20 p-4 gap-20'>
                         <div className='shadow-lg border border-gray-200 rounded-lg p-2 w-3xl flex-grow h-fit'>
@@ -27,7 +29,7 @@ const CartPage = () => {
                                         <img className='rounded-lg' src={item.image} alt={item.title} />
                                     </div>
 
-                                    <div className='pl-4 text-base flex w-full w-xl justify-between items-center '>
+                                    <div className='pl-4 text-base flex w-full justify-between items-center '>
                                         <ul className='flex  gap-2 flex-col'>
                                             <li key={item.id}>
                                                 {item.title}
@@ -51,7 +53,8 @@ const CartPage = () => {
                                     
                                 </span>
                             </div>
-                            <button className='mt-6 w-full py-3 bg-orange-400 text-white font-semibold rounded-md hover:bg-orange-500 transition duration-200 ease-in-out shadow-md cursor-pointer'>
+                            <button className='mt-6 w-full py-3 bg-orange-400 text-white font-semibold rounded-md hover:bg-orange-500 transition duration-200 ease-in-out shadow-md cursor-pointer'
+                                onClick={() => navigate('/checkout')}>
                                 Finalizar Compra
                             </button>
                         </div>

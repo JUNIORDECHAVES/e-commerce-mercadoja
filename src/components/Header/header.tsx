@@ -1,19 +1,12 @@
-import { Search, ShoppingCart, Menu, X } from 'lucide-react';
+import { Search, Menu } from 'lucide-react';
 import logo from "../../assets/mercadoja2.0-removebg-preview com sombra1.png"
 import { useNavigate } from 'react-router-dom';
 import UserAccountDropdown from '../DropdownMenu/DropdownMenu';
 import { memo, useEffect, useState } from 'react';
-import { useCartItems } from '../../contexts/userCarItens';
+import { CartDropdown } from '../CartDropdown/cartDropdown';
 
 export const Header = memo(() => {
     const navigate = useNavigate();
-    const location = window.location.pathname;
-    console.log(location);
-    
-
-    const { cartItems, handleRemoveItem, totalCartItems, totalCartPrice } = useCartItems()
-
-    const [isCartDropdownOpen, setIsCartDropdownOpen] = useState<boolean>(false);
 
     const [showheader, setShowHeader] = useState<boolean>(true);
     const [lastScrollY, setLastScrollY] = useState<number>(0);
@@ -77,58 +70,8 @@ export const Header = memo(() => {
 
                             {/* Botão do Carrinho com Dropdown */}
                             <div className="relative">
-                                <button
-                                    onClick={() => setIsCartDropdownOpen(!isCartDropdownOpen)}
-                                    className="flex items-center p-2 rounded-md hover:bg-[#364759] transition-colors duration-200"
-                                >
-                                    <ShoppingCart size={24} />
-                                    <span className="ml-1 hidden md:flex">Carrinho</span>
-                                    <span className="bg-[#FF9900] text-[#232F3E] text-xs font-bold px-2 py-0.5 rounded-full ml-1">{totalCartItems}</span>
-                                </button>
-
-                                {isCartDropdownOpen && (
-                                    <div className="absolute right-0 mt-2 w-72 bg-white rounded-md shadow-lg z-10 text-gray-800">
-                                        <div className="p-4 border-b border-gray-200">
-                                            <h3 className="text-lg font-semibold">Seu Carrinho ({totalCartItems} itens)</h3>
-                                        </div>
-                                        {cartItems.length > 0 ? (
-                                            <div className="max-h-60 overflow-y-auto">
-                                                {cartItems.map(item => (
-                                                    <div key={item.id} className="flex items-center p-4 border-b border-gray-100 last:border-b-0">
-                                                        <img src={item.image} alt={item.title} className="w-12 h-12 object-cover rounded mr-3" />
-                                                        <div className="flex-grow">
-                                                            <p className="text-sm font-medium">{item.title}</p>
-                                                            <p className="text-xs text-gray-600">Qtd: {item.quantity} x R$ {item.price.toFixed(2)}</p>
-                                                            <p className="text-sm font-bold">R$ {(item.price * item.quantity).toFixed(2)}</p>
-                                                        </div>
-                                                        <button onClick={() => handleRemoveItem(item.id)} className="text-gray-400 hover:text-red-500 transition-colors">
-                                                            <X size={16} />
-                                                        </button>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        ) : (
-                                            <div className="p-4 text-center text-gray-500">Seu carrinho está vazio.</div>
-                                        )}
-                                        <div className="p-4 border-t border-gray-200">
-                                            <div className="flex justify-between items-center mb-3">
-                                                <span className="font-semibold text-lg">Total:</span>
-                                                <span className="font-bold text-lg text-[#232F3E]">R$ {totalCartPrice.toFixed(2)}</span>
-                                            </div>
-                                            <button className="w-full bg-[#FF9900] text-[#232F3E] font-bold py-2 rounded-md hover:bg-[#E68A00] transition-colors duration-200">
-                                                Finalizar Compra
-                                            </button>
-                                            <button onClick={() => {
-                                                if(location !== "/shopping-cart") {
-                                                    navigate("/shopping-cart")
-                                                }
-                                                if (location === "/shopping-cart") return;
-                                                }} className="w-full mt-2 border border-gray-300 text-gray-700 font-semibold py-2 rounded-md hover:bg-gray-100 transition-colors duration-200">
-                                                Ver Carrinho Completo
-                                            </button>
-                                        </div>
-                                    </div>
-                                )}
+                                <CartDropdown />
+                                
                             </div>
 
                             <a href="#" className="flex items-center p-2 rounded-md hover:bg-[#364759] transition-colors duration-200">

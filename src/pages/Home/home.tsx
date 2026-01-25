@@ -3,19 +3,12 @@ import { ProductCard } from '../../components/ProductCard/Productcard';
 import data from '../../data/data.json';
 
 export const Home = () => {
-    const featuredProducts = [
-        { id: 1, image: 'https://placehold.co/400x300/C8E6C9/2E7D32?text=Maçãs+Frescas', title: 'Maçãs Frescas - Kg', price: 9.90, rating: 5 },
-        { id: 2, image: 'https://placehold.co/400x300/B2EBF2/00BCD4?text=Leite+Integral', title: 'Leite Integral Longa Vida 1L', price: 5.50, rating: 4 },
-        { id: 3, image: 'https://placehold.co/400x300/FFCCBC/FF5722?text=Pão+Francês', title: 'Pão Francês - Unidade', price: 1.20, rating: 4 },
-        { id: 4, image: 'https://placehold.co/400x300/F0F4C3/8BC34A?text=Frango+Congelado', title: 'Frango Congelado Inteiro', price: 18.99, rating: 5 },
-    ];
 
-    const newArrivals = [
-        { id: 5, image: 'https://placehold.co/400x300/FFF9C4/FFEB3B?text=Arroz+5kg', title: 'Arroz Branco Tipo 1 - 5kg', price: 25.00, rating: 5 },
-        { id: 6, image: 'https://placehold.co/400x300/BBDEFB/2196F3?text=Café+Torrado', title: 'Café Torrado e Moído 500g', price: 15.75, rating: 4 },
-        { id: 7, image: 'https://placehold.co/400x300/E1BEE7/9C27B0?text=Cerveja+Pilsen', title: 'Cerveja Pilsen Lata 350ml (Pack)', price: 32.00, rating: 5 },
-        { id: 8, image: 'https://placehold.co/400x300/D7CCC8/795548?text=Detergente', title: 'Detergente Lava Louças 500ml', price: 3.80, rating: 4 },
-    ];
+    const products = data.products;
+    const weekOffersProducts = products.filter((product) => product.discount > 0);
+    const productsnew = products.filter((product) => product.lastRenewalDate > '2025-01-17');
+
+
 
     return (
         <main className="flex-grow container mx-auto px-4 py-8">
@@ -61,16 +54,17 @@ export const Home = () => {
             <section className="mb-8">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9900] pb-2">Ofertas da Semana</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {featuredProducts.map(product => (
+                    {weekOffersProducts.map(product => (
                         <ProductCard key={product.id} product={product} />
-                    ))}
+                    )).slice(0, 8)
+                    }
                 </div>
             </section>
 
             <section className="mb-8">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9900] pb-2">engeral</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {data.supermarket.products.map(product => (
+                    {products.map(product => (
                         <Link key={product.id}  to={`/product/${product.id}`}>
                             <ProductCard  product={product} />
                         </Link>
@@ -82,9 +76,10 @@ export const Home = () => {
             <section className="mb-8">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9900] pb-2">Chegando Fresquinho</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {newArrivals.map(product => (
+                    {productsnew.map(product => (
                         <ProductCard key={product.id} product={product} />
-                    ))}
+                    )).slice(0, 8)
+                    }
                 </div>
             </section>
         </main>

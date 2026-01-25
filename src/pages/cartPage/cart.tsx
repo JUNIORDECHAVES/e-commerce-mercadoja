@@ -12,8 +12,11 @@ const CartPage = () => {
 
             <h1 className='text-4xl font-semibold text-center'>Shopping Cart</h1>
             {cartItems.length === 0 && (
-                <div className='w-full'>
+                <div className='w-full flex flex-col items-center'>
                     <p className='mt-4 font-medium text-center'>Seu Carrinho Estar Vazio.</p>
+                    <button className='border-2 border-[#E68A00] hover:border-[#FF9900] text-orange-400 hover:text-orange-300 cursor-pointer font-bold py-2 px-4 rounded-md mt-5'>
+                        Voltar para a Loja
+                    </button>
                     <div
                         style={{ backgroundImage: `url(${Logo})` }}
                         className={`h-100 w-100 mt-20 bg-cover`} />

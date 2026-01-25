@@ -18,7 +18,7 @@ import { useCartItems } from "../../contexts/userCarItens";
 const ProductPage = memo(() => {
     const { id } = useParams()
 
-    const itemId = data.supermarket.products.find((item) => item.id === Number(id));
+    const itemId = data.products.find((item) => item.id === Number(id));
     const imageArray = [itemId?.image];
 
     const { setCartItems, cartItems } = useCartItems();
@@ -36,16 +36,21 @@ const handleAddCart = () => {
         return alert("Produto já adicionado ao carrinho, aumente a quantidade!");
     }
 
+    if (!itemId) {
+    console.error("Produto não encontrado!");
+    return;
+}
+
 
     setCartItems((prevItems) => {
         return [
             ...prevItems,
             {
-                id: itemId?.id!,
-                title: itemId?.title!,
-                price: itemId?.price!,
+                id: itemId.id,
+                title: itemId.name,
+                price: itemId.price,
                 quantity: quantity,
-                image: itemId?.image || 'https://placehold.co/400x300/D7CCC8/795548?text=Imagem+Indisponível',
+                image: itemId.image || 'https://placehold.co/400x300/D7CCC8/795548?text=Imagem+Indisponível',
             },
         ];
     });
@@ -97,7 +102,7 @@ const handleAddCart = () => {
                     <div className="relative w-full max-w-lg overflow-hidden rounded-lg shadow-md">
                         <img
                             src={imageArray[currentImageIndex]}
-                            alt={`${itemId.title} - ${currentImageIndex + 1}`}
+                            alt={`${itemId.name} - ${currentImageIndex + 1}`}
                             className="w-full h-auto object-cover transition-transform duration-500 ease-in-out transform" /* Adicionado smooth transition */
                         />
 
@@ -136,7 +141,7 @@ const handleAddCart = () => {
 
                 {/* Coluna dos Detalhes do Produto */}
                 <div className="w-full md:w-1/2">
-                    <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">{itemId.title}</h1>
+                    <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">{itemId.name}</h1>
 
                     {/* Avaliação */}
                     <div className="flex items-center mb-4">
@@ -151,7 +156,7 @@ const handleAddCart = () => {
                                 }
                             />
                         ))}
-                        <span className="ml-2 text-gray-600 text-lg">({itemId.rating}.0 avaliações)</span>
+                        <span className="ml-2 text-gray-600 text-lg">({itemId.rating} avaliações)</span>
                     </div>
 
                     {/* Preço */}
@@ -165,7 +170,7 @@ const handleAddCart = () => {
                     {/* Detalhes Adicionais */}
                     <div className="mb-6 space-y-2 text-gray-700">
                         <p><span className="font-semibold">Peso/Volume:</span> {itemId.weight}</p>
-                        <p><span className="font-semibold">Disponibilidade:</span> <span className="text-green-600">{itemId.availability}</span></p>
+                        <p><span className="font-semibold">Disponibilidade:</span> <span className={itemId.available ? 'text-green-500' : 'text-red-500'}>{itemId.available ? 'Disponível' : 'Indisponível'}</span></p>
                     </div>
 
                     {/* Seletor de Quantidade */}

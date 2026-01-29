@@ -7,6 +7,7 @@ type ProductProps = {
     price: number;
     rating: number;
     category?: string;
+    discount?: number;
 };
 
 export const ProductCard = ({ product }: { product: ProductProps }) => {
@@ -45,10 +46,11 @@ export const ProductCard = ({ product }: { product: ProductProps }) => {
                     </span>
                 </div>
                 
-                <p className="text-xl font-bold text-gray-700 mb-4">
-                    R$ {product.price.toFixed(2)}
+                <p className="text-xl font-bold text-gray-500 mb-4">
+                    R$ {product.discount ? 
+                    <span> <del className="text-red-600 text-base line-through">{product.price.toFixed(2)}</del> - <strong className="text-green-600">{(product.price * (1 - product.discount / 100)).toFixed(2)}</strong></span>  
+                    : <span className="text-green-600">{product.price.toFixed(2)}</span> }
                 </p>
-                
                 
             </div>
         </div>

@@ -70,6 +70,7 @@ export const CartDropdown = () => {
                         </div>
                         <button className="w-full bg-[#FF9900] text-[#232F3E] font-bold py-2 rounded-md hover:bg-[#E68A00] transition-colors duration-200"
                             onClick={() => {
+                                setIsCartDropdownOpen(false);
                                 if (location !== "/checkout") {
                                     navigate("/checkout")
                                 }
@@ -79,6 +80,7 @@ export const CartDropdown = () => {
                             Finalizar Compra
                         </button>
                         <button onClick={() => {
+                                setIsCartDropdownOpen(false);
                             if (location !== "/shopping-cart") {
                                 navigate("/shopping-cart")
                             }

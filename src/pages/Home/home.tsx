@@ -55,7 +55,9 @@ export const Home = () => {
                 <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9900] pb-2">Ofertas da Semana</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {weekOffersProducts.map(product => (
-                        <ProductCard key={product.id} product={product} />
+                        <Link key={product.id}  to={`/product/${product.id}`}>
+                            <ProductCard  product={product  } />
+                        </Link>
                     )).slice(0, 8)
                     }
                 </div>
@@ -66,7 +68,7 @@ export const Home = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {products.map(product => (
                         <Link key={product.id}  to={`/product/${product.id}`}>
-                            <ProductCard  product={product} />
+                            <ProductCard  product={product  } />
                         </Link>
                     ))}
                 </div>
@@ -77,7 +79,9 @@ export const Home = () => {
                 <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9900] pb-2">Chegando Fresquinho</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {productsnew.map(product => (
-                        <ProductCard key={product.id} product={product} />
+                        <Link key={product.id}  to={`/product/${product.id}`}>
+                            <ProductCard  product={product  } />
+                        </Link>
                     )).slice(0, 8)
                     }
                 </div>

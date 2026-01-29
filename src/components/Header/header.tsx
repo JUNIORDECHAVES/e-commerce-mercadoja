@@ -1,15 +1,24 @@
 import { Search, Menu } from 'lucide-react';
 import logo from "../../assets/mercadoja2.0-removebg-preview com sombra1.png"
-import { useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import UserAccountDropdown from '../DropdownMenu/DropdownMenu';
 import { memo, useEffect, useState } from 'react';
 import { CartDropdown } from '../CartDropdown/cartDropdown';
+import { products } from '../../data/data.json';
 
 export const Header = memo(() => {
     const navigate = useNavigate();
+    const pathName = useLocation().pathname;
+
+    //1 -filtar categorias
+    const productCategories = products.filter(( product, index, array ) => {
+        //2 -retirar categorias repetidas
+        return array.findIndex(( p ) => p.category === product.category ) === index
+    });
 
     const [showheader, setShowHeader] = useState<boolean>(true);
     const [lastScrollY, setLastScrollY] = useState<number>(0);
+    const [categoryActive, setCategoryActive] = useState<string>("");
 
 
     const controlHeader = () => {
@@ -45,7 +54,10 @@ export const Header = memo(() => {
 
                 <div className="flex items-center flex-shrink-0 text-white mr-6">
                     <img className="w-30 md:w-3xs rounded-xl cursor-pointer drop-shadow-xl/50" src={logo} alt="logo"
-                        onClick={() => navigate("/")}
+                        onClick={() => {
+                            setCategoryActive("");
+                            navigate("/")
+                        }}
                     />
                 </div>
 
@@ -96,13 +108,29 @@ export const Header = memo(() => {
 
 
             <nav className="container mx-auto mt-3 hidden md:flex space-x-6 text-sm">
-                <a href="#" className="hover:text-[#FF9900] transition-colors duration-200">Frutas e Vegetais</a>
-                <a href="#" className="hover:text-[#FF9900] transition-colors duration-200">Laticínios e Frios</a>
-                <a href="#" className="hover:text-[#FF9900] transition-colors duration-200">Padaria e Confeitaria</a>
-                <a href="#" className="hover:text-[#FF9900] transition-colors duration-200">Carnes e Aves</a>
-                <a href="#" className="hover:text-[#FF9900] transition-colors duration-200">Bebidas</a>
-                <a href="#" className="hover:text-[#FF9900] transition-colors duration-200">Limpeza</a>
-                {/* Adicione mais categorias conforme necessário */}
+                { productCategories.map((productCategory) => {
+                    return(
+                    <Link
+                        key={productCategory.category}
+                        to={`/category/${productCategory.category}`}
+                        className={`hover:text-[#FF9900] transition-colors duration-200 ${categoryActive === productCategory.category ? 'text-[#FF9900]' : ''}`}
+                        onClick={() => {
+                            console.log("ola", pathName);
+                            if(pathName === `/category/${productCategory.category}`) {
+                                
+                                setCategoryActive("");
+                            }
+                            else {
+                                setCategoryActive(productCategory.category);
+                            }
+                        }}
+                    >
+                        {productCategory.category}
+                    </Link>
+                )}
+                
+                )}
+                
             </nav>
         </header >
     );

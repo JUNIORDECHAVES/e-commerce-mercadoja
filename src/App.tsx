@@ -9,7 +9,7 @@ import { UseCardtItensProvider } from './contexts/userCarItens';
 import CartPage from './pages/cartPage/cart';
 import { Checkout } from './pages/Checkout/checkout';
 
-// import CategoryPage from './pages/categoryPage';
+import { CategoryPage } from './pages/CategoryPage/categoryPage';
 
 
 
@@ -23,7 +23,7 @@ function App() {
             <Route path="/" element={<PageBase />}>
               <Route index element={<Home />} />
               <Route path='/product/:id' element={<ProductPage />} />
-              {/* <Route path='/category/:category' element={<CategoryPage />} /> */}
+              <Route path='/category/:category' element={<CategoryPage />} />
               <Route path='/shopping-cart' element={<CartPage />} />
               <Route path='/checkout' element={<Checkout />} />
             </Route>

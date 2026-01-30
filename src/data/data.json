@@ -1,4 +1,46 @@
 {
+    "categories": [
+        {
+            "id": 1,
+            "name": "Grãos e Cereais",
+            "image": "https://agropos.com.br/wp-content/uploads/2022/10/Imagem-2023-12-20T115320.707.png"
+        },
+        {
+            "id": 2,
+            "name": "Laticínios",
+            "image": "https://media.istockphoto.com/id/544807136/pt/foto/various-fresh-dairy-products.jpg?s=612x612&w=0&k=20&c=5xF4_HYNSebKFQOxwcULdiKub6C_HmISnviklEKiTB4="
+        },
+        {
+            "id": 3,
+            "name": "Bebidas",
+            "image": "https://nutritotal.com.br/publico-geral/wp-content/uploads/2019/08/shutterstock_284053346.jpg"
+        },
+        {
+            "id": 4,
+            "name": "Carnes e Peixes",
+            "image": "https://nutritotal.com.br/pro/wp-content/uploads/2005/04/Untitled-2021-10-09T131512.097.png.webp"
+        },
+        {
+            "id": 5,
+            "name": "Frutas e Verduras",
+            "image": "https://www.frubelle.com.br/wp-content/uploads/2019/12/A-import%C3%A2ncia-do-hortifruti-na-alimenta%C3%A7%C3%A3o-1000x600.jpg"
+        },
+        {
+            "id": 6,
+            "name": "Padaria",
+            "image": "https://thumbs.dreamstime.com/b/p%C3%A3o-v%C3%A1rios-p%C3%A3es-frescos-derramados-do-cesto-vista-frontal-243253412.jpg"
+        },
+        {
+            "id": 7,
+            "name": "Doces e Sobremesas",
+            "image": "https://static.itdg.com.br/images/640-auto/7af05c086e0ffd5c9dad57679029a2e3/sorvet-baixa.png"
+        },
+        {
+            "id": 8,
+            "name": "Limpeza",
+            "image": "https://images.ctfassets.net/qfxflpv0atz9/CzEYLNqLg4zfuBpkDBV90/66f4d8b752e76356240b86bf3b1b39df/thumb-Lista-de-produtos-de-limpeza-que-nao-podem-faltar-na-sua-casa.jpg"
+        }
+    ],
     "products": [
         {
             "id": 1,

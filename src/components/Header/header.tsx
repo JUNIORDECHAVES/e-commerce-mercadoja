@@ -4,17 +4,14 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import UserAccountDropdown from '../DropdownMenu/DropdownMenu';
 import { memo, useEffect, useState } from 'react';
 import { CartDropdown } from '../CartDropdown/cartDropdown';
-import { products } from '../../data/data.json';
+import { categories } from '../../data/data.json';
 
 export const Header = memo(() => {
     const navigate = useNavigate();
     const pathName = useLocation().pathname;
 
     //1 -filtar categorias
-    const productCategories = products.filter(( product, index, array ) => {
-        //2 -retirar categorias repetidas
-        return array.findIndex(( p ) => p.category === product.category ) === index
-    });
+    const productCategories = categories
 
     const [showheader, setShowHeader] = useState<boolean>(true);
     const [lastScrollY, setLastScrollY] = useState<number>(0);
@@ -111,21 +108,21 @@ export const Header = memo(() => {
                 { productCategories.map((productCategory) => {
                     return(
                     <Link
-                        key={productCategory.category}
-                        to={`/category/${productCategory.category}`}
-                        className={`hover:text-[#FF9900] transition-colors duration-200 ${categoryActive === productCategory.category ? 'text-[#FF9900]' : ''}`}
+                        key={productCategory.id}
+                        to={`/category/${productCategory.name}`}
+                        className={`hover:text-[#FF9900] transition-colors duration-200 ${categoryActive === productCategory.name ? 'text-[#FF9900]' : ''}`}
                         onClick={() => {
-                            console.log("ola", pathName);
-                            if(pathName === `/category/${productCategory.category}`) {
+                            
+                            if(pathName === `/category/${productCategory.name}`) {
                                 
                                 setCategoryActive("");
                             }
                             else {
-                                setCategoryActive(productCategory.category);
+                                setCategoryActive(productCategory.name);
                             }
                         }}
                     >
-                        {productCategory.category}
+                        {productCategory.name}
                     </Link>
                 )}
                 

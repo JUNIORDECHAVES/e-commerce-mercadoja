@@ -9,10 +9,7 @@ export const Home = () => {
     const weekOffersProducts = products.filter((product) => product.discount > 0);
     const productsnew = products.filter((product) => product.lastRenewalDate > '2025-01-17');
 
-    const productCategories = data.products.filter(( product, index, array ) => {
-        //2 -retirar categorias repetidas
-        return array.findIndex(( p ) => p.category === product.category ) === index
-    });
+    const Categories = data.categories;
 
     return (
         <main className="flex-grow container mx-auto px-4 py-8">
@@ -29,8 +26,8 @@ export const Home = () => {
                 <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9900] pb-2">Explore Nossas Seções</h2> {/* Laranja vibrante para a borda */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                     {
-                        productCategories.map((category) => (
-                            <Link to={`/category/${category.category}`} key={category.id}>
+                        Categories.map((category) => (
+                            <Link to={`/category/${category.name}`} key={category.id}>
                                 <CategoryCard category={category} />
                             </Link>
                         ))

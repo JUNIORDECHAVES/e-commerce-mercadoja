@@ -91,7 +91,7 @@ const CartPage = () => {
 
                             <button
                                 onClick={() => navigate('/')}
-                                className='w-full py-3 border-2 border-gray-200 text-gray-600 font-semibold rounded-lg hover:border-orange-400 hover:text-orange-500 transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer'
+                                className='w-full py-3 border-2 border-gray-200 text-gray-600 font-semibold rounded-lg hover:border-orange-400 hover:text-orange-500 transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer md:px-2'
                             >
                                 <span className="group-hover:-translate-x-1 transition-transform">←</span>
                                 Continuar Comprando

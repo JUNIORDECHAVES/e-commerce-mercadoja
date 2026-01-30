@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ProductCard } from '../../components/ProductCard/Productcard';
 import data from '../../data/data.json';
+import { CategoryCard } from '../../components/CategoryCard/categoryCard';
 
 export const Home = () => {
 
@@ -8,7 +9,10 @@ export const Home = () => {
     const weekOffersProducts = products.filter((product) => product.discount > 0);
     const productsnew = products.filter((product) => product.lastRenewalDate > '2025-01-17');
 
-
+    const productCategories = data.products.filter(( product, index, array ) => {
+        //2 -retirar categorias repetidas
+        return array.findIndex(( p ) => p.category === product.category ) === index
+    });
 
     return (
         <main className="flex-grow container mx-auto px-4 py-8">
@@ -24,30 +28,14 @@ export const Home = () => {
             <section className="mb-8 block md:hidden ">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-[#FF9900] pb-2">Explore Nossas Seções</h2> {/* Laranja vibrante para a borda */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-xl transition-shadow duration-300">
-                        <img src="https://placehold.co/150x100/E8F5E9/4CAF50?text=Frutas+e+Vegetais" alt="Frutas e Vegetais" className="mx-auto mb-4 rounded-md" />
-                        <h3 className="font-semibold text-lg text-gray-800">Frutas e Vegetais</h3>
-                    </div>
-                    <div className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-xl transition-shadow duration-300">
-                        <img src="https://placehold.co/150x100/E3F2FD/2196F3?text=Laticínios" alt="Laticínios" className="mx-auto mb-4 rounded-md" />
-                        <h3 className="font-semibold text-lg text-gray-800">Laticínios e Frios</h3>
-                    </div>
-                    <div className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-xl transition-shadow duration-300">
-                        <img src="https://placehold.co/150x100/FFFDE7/FFC107?text=Padaria" alt="Padaria" className="mx-auto mb-4 rounded-md" />
-                        <h3 className="font-semibold text-lg text-gray-800">Padaria e Confeitaria</h3>
-                    </div>
-                    <div className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-xl transition-shadow duration-300">
-                        <img src="https://placehold.co/150x100/FBE9E7/FF7043?text=Carnes e Aves" alt="Congelados" className="mx-auto mb-4 rounded-md" />
-                        <h3 className="font-semibold text-lg text-gray-800">Carnes e Aves</h3>
-                    </div>
-                    <div className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-xl transition-shadow duration-300">
-                        <img src="https://placehold.co/150x100/FFFDE7/FFEB3B?text=Bebidas" alt="Congelados" className="mx-auto mb-4 rounded-md" />
-                        <h3 className="font-semibold text-lg text-gray-800">Bebidas</h3>
-                    </div>
-                    <div className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-xl transition-shadow duration-300">
-                        <img src="https://placehold.co/150x100/f2cfff/9c2aff?text=Limpeza" alt="Congelados" className="mx-auto mb-4 rounded-md" />
-                        <h3 className="font-semibold text-lg text-gray-800">Limpeza</h3>
-                    </div>
+                    {
+                        productCategories.map((category) => (
+                            <Link to={`/category/${category.category}`} key={category.id}>
+                                <CategoryCard category={category} />
+                            </Link>
+                        ))
+                    }
+                    
                 </div>
             </section>
 

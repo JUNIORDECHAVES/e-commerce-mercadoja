@@ -7,8 +7,6 @@ const CartPage = () => {
     const { cartItems, totalCartPrice } = useCartItems();
 
     return (
-        // Substituído w-screen por w-full para evitar scroll horizontal desnecessário
-        // min-h-screen garante que o fundo cubra a tela toda sem cortar o conteúdo
         <div className='w-full min-h-screen mt-10 md:mt-20 px-4 pb-10'>
 
             <h1 className='text-3xl md:text-4xl font-semibold text-center mb-10'>Shopping Cart</h1>
@@ -23,7 +21,6 @@ const CartPage = () => {
                     >
                         Voltar para a Loja
                     </button>
-                    {/* Imagem responsiva: max-w evita que ela estoure em telas pequenas */}
                     <div className='mt-10 w-full max-w-[300px] md:max-w-[400px]'>
                         <img src={Logo} alt="Carrinho Vazio" className="w-full h-auto object-contain" />
                     </div>

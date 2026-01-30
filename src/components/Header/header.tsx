@@ -82,7 +82,7 @@ export const Header = memo(() => {
 
                             {/* Botão do Carrinho com Dropdown */}
                             <div className="relative">
-                                <CartDropdown />
+                                <CartDropdown isScrolling={showheader} />
                                 
                             </div>
 

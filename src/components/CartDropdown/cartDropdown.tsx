@@ -4,13 +4,19 @@ import { useCartItems } from "../../contexts/userCarItens";
 import { X, ShoppingCart } from 'lucide-react';
 import { useEffect, useRef, useState } from "react";
 
-export const CartDropdown = () => {
+export const CartDropdown = ({ isScrolling }: { isScrolling: boolean }) => {
     const navigate = useNavigate();
     const location = useLocation().pathname;
 
     const [isCartDropdownOpen, setIsCartDropdownOpen] = useState<boolean>(false);
     const containerRef = useRef<HTMLDivElement | null>(null);
     const { cartItems, handleRemoveItem, totalCartItems, totalCartPrice } = useCartItems();
+
+    useEffect(() => {
+        if (!isScrolling) {
+            setIsCartDropdownOpen(false);
+        }
+    }, [isScrolling]);
 
     useEffect(() => {
         // Funcionalidade para fechar o dropdown ao clicar fora dele

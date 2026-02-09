@@ -1,6 +1,6 @@
-import { ChevronLeft, ChevronRight, Minus, Plus, ShoppingCart, Star } from "lucide-react";
-import { memo, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Minus, Plus, ShoppingCart, Star } from "lucide-react";
+import { memo, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import data from "../../data/data.json";
 import { useCartItems } from "../../contexts/userCarItens";
 
@@ -16,10 +16,10 @@ import { useCartItems } from "../../contexts/userCarItens";
 // }
 
 const ProductPage = memo(() => {
-    const { id } = useParams()
+    const { id } = useParams();
+    const navigate = useNavigate();
 
     const itemId = data.products.find((item) => item.id === Number(id));
-    const imageArray = [itemId?.image];
 
     const { setCartItems, cartItems } = useCartItems();
 
@@ -59,7 +59,7 @@ const handleAddCart = () => {
 
 
     const [quantity, setQuantity] = useState(1);
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
 
     const handleQuantityChange = (type: 'increase' | 'decrease') => {
         if (type === 'increase') {
@@ -69,27 +69,11 @@ const handleAddCart = () => {
         }
     };
 
-    const goToPreviousImage = () => {
-        setCurrentImageIndex(prevIndex =>
-            prevIndex === 0 ? imageArray.length - 1 : prevIndex - 1
-        );
-    };
+    const handleBuyNow = () => {
+        handleAddCart();
+        navigate('/checkout');
+    }
 
-    const goToNextImage = () => {
-        setCurrentImageIndex(prevIndex =>
-            prevIndex === imageArray.length - 1 ? 0 : prevIndex + 1
-        );
-    };
-
-    useEffect(() => {
-        if (imageArray.length > 1) {
-            const interval = setInterval(() => {
-                goToNextImage();
-            }, 2000);
-
-            return () => clearInterval(interval);
-        }
-    }, [currentImageIndex, imageArray.length]);
 
     if (!itemId) {
         return <div className="container mx-auto px-4 py-8">Produto não encontrado.</div>;
@@ -101,41 +85,13 @@ const handleAddCart = () => {
                 <div className="w-full md:w-1/2 flex flex-col items-center mb-6 md:mb-0">
                     <div className="relative w-full max-w-lg overflow-hidden rounded-lg shadow-md">
                         <img
-                            src={imageArray[currentImageIndex]}
-                            alt={`${itemId.name} - ${currentImageIndex + 1}`}
+                            src={itemId.image}
+                            alt={`${itemId.name}`}
                             className="w-full h-auto object-cover transition-transform duration-500 ease-in-out transform" /* Adicionado smooth transition */
                         />
 
-                        {imageArray.length > 1 && (
-                            <>
-                                <button
-                                    onClick={goToPreviousImage}
-                                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-r-md hover:bg-opacity-75 transition-colors duration-200"
-                                >
-                                    <ChevronLeft size={24} />
-                                </button>
-                                <button
-                                    onClick={goToNextImage}
-                                    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-l-md hover:bg-opacity-75 transition-colors duration-200"
-                                >
-                                    <ChevronRight size={24} />
-                                </button>
-                            </>
-                        )}
+                        
                     </div>
-
-                    {imageArray.length > 1 && (
-                        <div className="flex justify-center space-x-2 mt-4">
-                            {imageArray.map((_, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => setCurrentImageIndex(index)}
-                                    className={`w-3 h-3 rounded-full ${index === currentImageIndex ? 'bg-[#FF9900]' : 'bg-gray-400'} transition-colors duration-200`}
-                                ></button>
-                            ))}
-                        </div>
-                    )}
-
 
                 </div>
 
@@ -193,7 +149,10 @@ const handleAddCart = () => {
                         </div>
                     </div>
 
-                    <button className="cursor-pointer w-full bg-[#E68A00] text-white font-bold py-3 px-6 rounded-md shadow-lg hover:bg-[#FF9900] transition-colors duration-200 text-lg mb-4 flex items-center justify-center space-x-2">
+                    <button className="cursor-pointer w-full bg-[#E68A00] text-white font-bold py-3 px-6 rounded-md shadow-lg hover:bg-[#FF9900] transition-colors duration-200 text-lg mb-4 flex items-center justify-center space-x-2"
+                    onClick={handleBuyNow
+                    }
+                    >
                         <span>Comprar Agora</span>
                     </button>
 

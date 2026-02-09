@@ -17,8 +17,8 @@ export const Home = () => {
             <section className="bg-gradient-to-r from-[#232F3E] to-[#47576B] text-white rounded-lg shadow-lg p-8 mb-8 text-center">
                 <h2 className="text-4xl font-bold mb-4">Sua Feira Fresca na Porta de Casa!</h2>
                 <p className="text-xl mb-6">Encontre as melhores ofertas e a maior variedade de produtos.</p>
-                <button className="bg-[#FF9900] text-[#232F3E] font-bold py-3 px-8 rounded-full text-lg hover:bg-[#E68A00] transition-colors duration-300">
-                    Começar a Comprar!
+                <button className="bg-[#FF9900] text-[#232F3E] font-bold py-3 px-8 rounded-full text-lg transition-colors duration-300">
+                    Começe a Comprar!
                 </button>
             </section>
 

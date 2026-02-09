@@ -83,9 +83,9 @@ export const Header = memo(() => {
                                 
                             </div>
 
-                            <a href="#" className="flex items-center p-2 rounded-md hover:bg-[#364759] transition-colors duration-200">
-                                <UserAccountDropdown />
-                            </a>
+                            <div className="flex items-center p-2 rounded-md hover:bg-[#364759] transition-colors duration-200">
+                                <UserAccountDropdown isScrolling={showheader} />
+                            </div>
                         </div>
                     </div>
                 </div>

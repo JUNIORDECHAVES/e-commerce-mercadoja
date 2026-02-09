@@ -11,6 +11,7 @@ import { Checkout } from './pages/Checkout/checkout';
 
 import { CategoryPage } from './pages/CategoryPage/categoryPage';
 import { AuthProvider } from './contexts/AuthContext';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
 
 
@@ -21,6 +22,7 @@ function App() {
       <UseCardtItensProvider>
         <AuthProvider>
         <BrowserRouter>
+        <ScrollToTop />
           <Routes>
             <Route path="/" element={<PageBase />}>
               <Route index element={<Home />} />

@@ -1,14 +1,20 @@
 import { User, LogOut, Package, ShoppingCart } from 'lucide-react';
-import { memo, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
-const UserAccountDropdown = memo(
-    () => {
+const UserAccountDropdown = ({ isScrolling }: { isScrolling: boolean }) => {
         const { usuario, isLogado, logout } = useAuth();
         const [isDropdownOpen, setIsDropdownOpen] = useState(false);
         const containerRef = useRef<HTMLDivElement | null>(null);
         const navigate = useNavigate();
+
+            useEffect(() => {
+        if (!isScrolling) {
+            setIsDropdownOpen(false);
+        }
+    }, [isScrolling]);
+
 
         useEffect(() => {
             const handleClickOutside = (e: MouseEvent) => {
@@ -22,7 +28,7 @@ const UserAccountDropdown = memo(
 
         return (
             <div className="relative text-right" ref={containerRef}>
-                <button
+                <button type='button'
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     className="cursor-pointer flex items-center justify-end text-white hover:text-[#FF9900] transition-colors duration-200"
 
@@ -33,13 +39,13 @@ const UserAccountDropdown = memo(
                 </button>
 
                 {isDropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-gray-700 rounded-md shadow-lg z-10">
+                    <div className="absolute p-2 right-0 mt-2 w-48 bg-gray-600 rounded-md shadow-lg z-10">
                         <div className="py-1">
                             {!isLogado ? (
                                 <>
-                                    <button
+                                    <button type='button'
                                         onClick={() => navigate('/login')}
-                                        className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-gray-600"
+                                        className="block bg-gray-700 w-full text-left px-4 py-2 text-sm text-white hover:bg-gray-800 rounded-xs cursor-pointer"
                                     >
                                         Fazer Login
                                     </button>
@@ -71,6 +77,6 @@ const UserAccountDropdown = memo(
             </div>
         );
     }
-)
+
 
 export default UserAccountDropdown;

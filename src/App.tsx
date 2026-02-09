@@ -10,6 +10,7 @@ import CartPage from './pages/cartPage/cart';
 import { Checkout } from './pages/Checkout/checkout';
 
 import { CategoryPage } from './pages/CategoryPage/categoryPage';
+import { AuthProvider } from './contexts/AuthContext';
 
 
 
@@ -18,6 +19,7 @@ function App() {
   return (
     <>
       <UseCardtItensProvider>
+        <AuthProvider>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<PageBase />}>
@@ -33,6 +35,7 @@ function App() {
           </Routes>
 
         </BrowserRouter>
+        </AuthProvider>
       </UseCardtItensProvider>
     </>
   )
